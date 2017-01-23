@@ -68,12 +68,18 @@ var AppRouter = Backbone.Router.extend({
     var eventListToday = new EventListToday();
     var todayView = new EventListView({collection: eventListToday});
     eventListToday.fetch();
+    $('#today-route').addClass('active');
+    $('#tomorrow-route').removeClass('active');
+    $('#day-label').html("<h4>Today's Events</h4>");
   },
 
   tomorrowRoute: function() {
     var eventListTomorrow = new EventListTomorrow();
     var tomorrowView = new EventListView({collection: eventListTomorrow});
     eventListTomorrow.fetch();
+    $('#tomorrow-route').addClass('active');
+    $('#today-route').removeClass('active');
+    $('#day-label').html("<h4>Tomorrow's Events</h4>");
   }
 });
 

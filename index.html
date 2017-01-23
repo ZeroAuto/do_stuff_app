@@ -9,10 +9,19 @@
   <body>
     <div class="container">
       <div class="row">
-        <div id="navigation">
-          <a href="#/today">Today's Events</a>
-          <a href="#/tomorrow">Tomorrow's Events</a>
+        <div class="image-container col-xs-3">
+          <img class="logo" src="https://res.cloudinary.com/dostuff-media/image/upload/v1484583575/metro-logo-1.png">
         </div>
+      </div>
+
+      <div class="row">
+        <div id="navigation" class="col-xs-12 text-right">
+          <a id="today-route" class="btn" href="#/today">Today's Events</a>
+          <a id="tomorrow-route" class="btn" href="#/tomorrow">Tomorrow's Events</a>
+        </div>
+      </div>
+
+      <div id="day-label">
       </div>
 
       <div id="content" class="row">
@@ -20,8 +29,9 @@
     </div>
 
     <script type="text/template" id="event-template">
-      <div class="col-xs-4">
-        <p>{{ title }} @ {{ venue.title }}</p>
+      <div class="col-sm-4">
+        <img class="cover-image" src="https://res-2.cloudinary.com/dostuff-media/image/upload//c_fill,g_faces,b_rgb:090909,f_auto,h_300,w_864/{{ imagery.photo }}">
+        <p>{{ title }} @ {{ venue.title }} | </p>
       </div>
     </script>
 
