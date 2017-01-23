@@ -6,3 +6,8 @@
 .cover-image {
   width:100%;
 }
+
+.bottom-text {
+  /*p tags need fixed height to avoid weird artifact*/
+  height:60px;
+}
