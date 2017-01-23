@@ -11,3 +11,13 @@
   /*p tags need fixed height to avoid weird artifact*/
   height:60px;
 }
+
+.navigation-wrapper {
+  width:162px;
+  float:right;
+  margin-right:15px;
+}
+
+.active {
+  
+}
