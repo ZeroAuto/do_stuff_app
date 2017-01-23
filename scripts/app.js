@@ -1,6 +1,21 @@
 var eventListDom = $('#content');
 
-var Event = Backbone.Model.extend({});
+var Event = Backbone.Model.extend({
+  initialize: function() {
+    this.formatTime()
+  },
+
+  formatTime: function() {
+    var startTime = new Date(this.get('begin_time'));
+    var minutes =  startTime.getMinutes().toString();
+    if (minutes.length === 1) {
+      this.set('start_time', startTime.getHours() + ":0" + startTime.getMinutes())
+    } else {
+      this.set('start_time', startTime.getHours() + ":" + startTime.getMinutes())
+    }
+
+  }
+});
 
 var EventListToday = Backbone.Collection.extend({
   model: Event,
