@@ -2,28 +2,32 @@ var eventListDom = $('#content');
 
 var Event = Backbone.Model.extend({
   initialize: function() {
-    this.formatTime()
+    this.formatTime();
   },
 
+  // I am sure there is a cleaner way of doing this but I am not as familiar with javascript's datetime helpers as I am with Ruby's
+  // and it doesn't appear as if strftime is supported by javascript without importing another library
   formatTime: function() {
     var startTime = new Date(this.get('begin_time'));
     var minutes =  startTime.getMinutes().toString();
-    if (minutes.length === 1) {
-      this.set('start_time', startTime.getHours() + ":0" + startTime.getMinutes())
-    } else {
-      this.set('start_time', startTime.getHours() + ":" + startTime.getMinutes())
-    }
 
+    if (minutes.length === 1) {
+      this.set('start_time', startTime.getHours() + ":0" + startTime.getMinutes());
+    } else {
+      this.set('start_time', startTime.getHours() + ":" + startTime.getMinutes());
+    }
   }
 });
 
 var EventListToday = Backbone.Collection.extend({
   model: Event,
   url: 'http://do512.com/events/today.json',
+
   sync : function(method, collection, options) {
     options.dataType = "jsonp";
     return Backbone.sync(method, collection, options);
   },
+
   parse: function(response) {
     return response.events;
   },
@@ -32,10 +36,12 @@ var EventListToday = Backbone.Collection.extend({
 var EventListTomorrow = Backbone.Collection.extend({
   model: Event,
   url: 'http://do512.com/events/tomorrow.json',
+
   sync : function(method, collection, options) {
     options.dataType = "jsonp";
     return Backbone.sync(method, collection, options);
   },
+
   parse: function(response) {
     return response.events;
   }
@@ -83,6 +89,8 @@ var AppRouter = Backbone.Router.extend({
     var eventListToday = new EventListToday();
     var todayView = new EventListView({collection: eventListToday});
     eventListToday.fetch();
+
+    // I had sworn that bootstrap took care of adding and removing the '.active' class on links but a little jquery never hurt anyone
     $('#today-route').addClass('active');
     $('#tomorrow-route').removeClass('active');
     $('#day-label').html("<h4>Today's Events</h4>");
