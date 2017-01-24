@@ -9,13 +9,8 @@ var Event = Backbone.Model.extend({
   // and it doesn't appear as if strftime is supported by javascript without importing another library
   formatTime: function() {
     var startTime = new Date(this.get('begin_time'));
-    var minutes =  startTime.getMinutes().toString();
 
-    if (minutes.length === 1) {
-      this.set('start_time', startTime.getHours() + ":0" + startTime.getMinutes());
-    } else {
-      this.set('start_time', startTime.getHours() + ":" + startTime.getMinutes());
-    }
+    this.set('start_time', startTime.toLocaleTimeString().replace(/:\d+ /, ' '));
   }
 });
 
